@@ -225,6 +225,7 @@ class _StudyPageState extends State<StudyPage> {
 
 class StudyItem extends StatelessWidget {
   final IconData icon;
+  //final은 한 번 값이 정해지면, 그 뒤에는 다른 값으로 바꿀 수 없게 만드는 키워드
   final String title;
   final String description;
 
@@ -253,6 +254,7 @@ class StudyItem extends StatelessWidget {
           const SizedBox(width: 12),
 
           Expanded(
+            //Expanded는 Row나 Column 안에서 남는 공간을 최대한 차지하게 만드는 위젯
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

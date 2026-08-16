@@ -1,37 +1,36 @@
 import 'package:flutter/material.dart';
 
-
-//앱의 시작점 Dart 프로그램은 main 함수에서 실행 
+// 앱의 시작점입니다. Dart 프로그램은 항상 main 함수에서 실행됩니다.
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  //extends Stataless widget == 이 위젯 자체는 상태값이 변하지 않는 위젯이다 
-  // 카운트가 바뀐다거나 좋아요 상태가 바뀌는 일이 없음 
+  // StatelessWidget은 이 위젯 안에서 바뀌는 값이 없을 때 사용합니다.
+  // 예: 앱의 기본 설정처럼 한 번 정해지면 그대로 쓰는 화면 구조
   const MyApp({super.key});
-  //MyApp 객체를 만들 때 사용하는 생성자 like const MyApp()
+  // const 생성자는 같은 값의 위젯을 다시 만들 때 성능에 도움이 됩니다.
 
   @override
   Widget build(BuildContext context) {
-    //build 는 이 위젯이 화면에 어떻게 생길지 정의하는 함수 return 이 있어야 함 
+    // build는 이 위젯이 화면에 어떻게 보일지 설명하는 함수입니다.
     return MaterialApp(
-      //Flutter 앱 전체를 감싸는 최상위 위젯 
-      //앱 테마, 첫 화면, 네비게이션 등을 여기서 설정
+      // MaterialApp은 앱 전체의 기본 설정을 담당합니다.
+      // 테마, 첫 화면, 화면 이동 같은 큰 설정이 여기 들어갑니다.
       debugShowCheckedModeBanner: false,
-      //디버그 배너 없애기 
+      // 오른쪽 위 DEBUG 배너를 숨깁니다.
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.blue,
         ),
         useMaterial3: true,
       ),
-      //앱 전체의 디자인 테마를 설정 하는 부분 테마 데이터 
+      // 앱 전체의 디자인 분위기와 색상 규칙을 정하는 부분입니다.
       home: const StudyPage(),
-      //첫 화면 지정 앱을 실행 했을 때 처음 보여줄 화면을 정하는 코드 like index
+      // 앱을 실행했을 때 처음 보여줄 화면입니다.
     );
 
-    //MyApp -> Material App -> StudyPage
+    // 화면 흐름: MyApp -> MaterialApp -> StudyPage
   }
 }
 
@@ -42,16 +41,16 @@ class StudyPage extends StatefulWidget {
   State<StudyPage> createState() => _StudyPageState();
 }
 
-//값이 바뀌는 기능은 StatefulWidget 로 구현 해야 함 
-//StudyPage가 사용할 상태 관리 클래스를 연결하는 코드
+// StatefulWidget은 화면 안의 값이 바뀔 수 있을 때 사용합니다.
+// StudyPage는 아래의 _StudyPageState 클래스와 연결되어 상태를 관리합니다.
 
 class _StudyPageState extends State<StudyPage> {
   int count = 0;
   bool isFavorite = false;
-//두개의 상태값 선언
+  // 화면에서 바뀔 값을 변수로 저장합니다.
 
-//숫자 함수들
   void increaseCount() {
+    // setState 안에서 값을 바꾸면 Flutter가 화면을 다시 그립니다.
     setState(() {
       count++;
     });
@@ -74,6 +73,7 @@ class _StudyPageState extends State<StudyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Scaffold는 앱바, 본문, 버튼 같은 기본 화면 뼈대를 제공합니다.
       appBar: AppBar(
         title: const Text(
           'Flutter 공부',
@@ -87,6 +87,7 @@ class _StudyPageState extends State<StudyPage> {
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
+          // Column은 children 위젯들을 위에서 아래로 배치합니다.
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
@@ -115,6 +116,7 @@ class _StudyPageState extends State<StudyPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
+                    // Row는 children 위젯들을 왼쪽에서 오른쪽으로 배치합니다.
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
@@ -126,6 +128,7 @@ class _StudyPageState extends State<StudyPage> {
                       ),
 
                       IconButton(
+                        // onPressed에는 버튼을 눌렀을 때 실행할 함수를 넣습니다.
                         onPressed: toggleFavorite,
                         icon: Icon(
                           isFavorite

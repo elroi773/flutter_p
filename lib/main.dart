@@ -270,6 +270,7 @@ class StudyItem extends StatelessWidget {
                 ),
 
                 const SizedBox(height: 4),
+                //높이 4 
 
                 Text(
                   description,

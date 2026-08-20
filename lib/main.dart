@@ -114,6 +114,7 @@ class _TodoStudyPageState extends State<TodoStudyPage> {
                     icon: const Icon(Icons.add),
                   ),
                 ],
+                
               ),
               const SizedBox(height: 20),
               Expanded(

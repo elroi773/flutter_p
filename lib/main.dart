@@ -70,6 +70,7 @@ class _TodoStudyPageState extends State<TodoStudyPage> {
     });
   }
 
+
   // 삭제 버튼을 누른 항목을 목록에서 제거합니다.
   void removeTodo(int index) {
     setState(() {

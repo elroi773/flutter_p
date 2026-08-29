@@ -4,22 +4,30 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_p/main.dart';
 
 void main() {
-  testWidgets('Todo 학습 화면의 기본 요소를 보여준다', (WidgetTester tester) async {
-    // MyApp을 테스트 화면에 올리고 첫 프레임을 그립니다.
+  testWidgets('음료 트래커 화면의 기본 요소를 보여준다', (WidgetTester tester) async {
     await tester.pumpWidget(const MyApp());
 
-    // 상단 제목과 초기 할 일 목록이 정상적으로 보이는지 확인합니다.
-    expect(find.text('Flutter 기초 예제'), findsOneWidget);
-    expect(find.text('오늘 할 일'), findsOneWidget);
-    expect(find.text('완료: 0 / 3'), findsOneWidget);
-    expect(find.text('TextField로 글자 입력받기'), findsOneWidget);
-    expect(find.text('setState로 화면 다시 그리기'), findsOneWidget);
-    expect(find.text('ListView로 목록 보여주기'), findsOneWidget);
+    expect(find.text('Flutter 음료 트래커'), findsOneWidget);
+    expect(find.text('오늘의 물 목표'), findsOneWidget);
+    expect(find.text('8잔을 목표로 기록합니다.'), findsOneWidget);
+    expect(find.text('0 / 8'), findsOneWidget);
+    expect(find.text('첫 잔을 기록해보세요.'), findsOneWidget);
 
-    // 입력창, 추가 버튼, 체크박스, 삭제 버튼처럼 조작 가능한 요소를 확인합니다.
-    expect(find.byType(TextField), findsOneWidget);
-    expect(find.byIcon(Icons.add), findsOneWidget);
-    expect(find.byType(Checkbox), findsNWidgets(3));
-    expect(find.byIcon(Icons.delete_outline), findsNWidgets(3));
+    expect(find.text('한 잔 추가'), findsOneWidget);
+    expect(find.byIcon(Icons.remove), findsOneWidget);
+    expect(find.byIcon(Icons.refresh), findsOneWidget);
+    expect(find.text('물'), findsOneWidget);
+    expect(find.text('커피'), findsOneWidget);
+    expect(find.text('차'), findsOneWidget);
+  });
+
+  testWidgets('추가 버튼을 누르면 마신 잔 수가 증가한다', (WidgetTester tester) async {
+    await tester.pumpWidget(const MyApp());
+
+    await tester.tap(find.text('한 잔 추가'));
+    await tester.pump();
+
+    expect(find.text('1 / 8'), findsOneWidget);
+    expect(find.text('7잔 더 마시면 목표 달성입니다.'), findsOneWidget);
   });
 }
